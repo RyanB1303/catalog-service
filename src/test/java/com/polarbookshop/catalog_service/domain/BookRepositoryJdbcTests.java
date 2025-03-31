@@ -29,10 +29,11 @@ public class BookRepositoryJdbcTests {
     private JdbcAggregateTemplate jdbcAggregateTemplate;
 
     @Test
-    void findAllBook() {
-        var book1 = Book.of("1234567891", "TitleA", "AuthorA", 1.33);
-        var book2 = Book.of("1234567892", "TitleB", "AuthorB", 2.33);
-        jdbcAggregateTemplate.insertAll(List.of(book1, book2));
+    void findAllBooks() {
+        var book1 = Book.of("1234567883", "TitleA", "AuthorA", 1.33);
+        var book2 = Book.of("1234567894", "TitleB", "AuthorB", 2.33);
+        jdbcAggregateTemplate.insert(book1);
+        jdbcAggregateTemplate.insert(book2);
 
         Iterable<Book> actualBooks = bookRepository.findAll();
 
@@ -54,7 +55,7 @@ public class BookRepositoryJdbcTests {
 
     @Test
     void findBookByIsbnWhenNotExisting() {
-        boolean existing = bookRepository.existsByIsbn("1234567891");
+        boolean existing = bookRepository.existsByIsbn("1234567898");
         assertThat(existing).isFalse();
     }
 
