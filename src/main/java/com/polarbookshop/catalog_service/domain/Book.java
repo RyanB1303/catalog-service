@@ -34,6 +34,8 @@ public record Book(
         )
         Double price,
 
+        String publisher,
+
         @Version
         int version,
 
@@ -44,10 +46,10 @@ public record Book(
         Instant lastModifiedDate
 ) {
         public static Book of(
-                String isbn, String title, String author, Double price
+                String isbn, String title, String author, Double price, String publisher
         ) {
                 return new Book(
-                        null, isbn, title, author, price, 0, null, null
+                        null, isbn, title, author, price, publisher, 0, null, null
                 );
         }
 }
