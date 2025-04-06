@@ -1,3 +1,13 @@
+server:
+  port: 9001
+  shutdown: graceful
+  tomcat:
+    connection-timeout: 2s
+    keep-alive-timeout: 15s
+    threads:
+      max: 50
+      min-spare: 5
+
 spring:
   application:
     name: catalog-service
@@ -21,24 +31,14 @@ spring:
     hikari:
       connection-timeout: 2000
       maximum-pool-size: 5
-
+  lifecycle:
+    timeout-per-shutdown-phase: 15s
 
 management:
   endpoints:
     web:
       exposure:
         include: refresh
-
-
-server:
-  port: 9001
-  tomcat:
-    connection-timeout: 2s
-    keep-alive-timeout: 15s
-    threads:
-      max: 50
-      min-spare: 5
-
 
 polar:
   greeting: Welcome to book catalog!
