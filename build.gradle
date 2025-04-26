@@ -37,6 +37,7 @@ dependencies {
 	testImplementation 'org.testcontainers:postgresql'
 	implementation 'org.flywaydb:flyway-core'
 	implementation 'org.flywaydb:flyway-database-postgresql'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
 dependencyManagement {
@@ -57,6 +58,13 @@ bootRun {
 bootBuildImage {
 	imageName = "${project.name}"
 	environment = ["BP_JVM_VERSION" : "17.*"]
+
+	if (System.getProperty( "os.arch" ).toLowerCase().startsWith('aarch')) {
+		builder = "paketobuildpacks/builder-jammy-buildpackless-tiny"
+		buildpacks = [ "gcr.io/paketo-buildpacks/java" ]
+	} else {
+		builder = "docker.io/paketobuildpacks/builder-jammy-tiny"
+	}
 
 	docker {
 		publishRegistry {
